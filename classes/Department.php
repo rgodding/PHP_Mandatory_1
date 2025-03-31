@@ -90,6 +90,25 @@ class Department extends Database
             return false;
         }
     }
+
+    function getByEmployeeId(int $employeeId): array|false
+    {
+        $sql = <<<SQL
+        SELECT d.departmentId, d.name
+        FROM department d
+        JOIN employee e ON d.departmentId = e.departmentId
+        WHERE e.employeeId = :employeeId
+        SQL;
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':employeeId', $employeeId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 }
 
 

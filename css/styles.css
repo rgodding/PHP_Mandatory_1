@@ -56,8 +56,20 @@
 .data-menu-row {
     height: 35px;
 }
-
 .data-table tbody tr td {
     border-bottom: solid 1px #000;
 }
 
+/* Form Styles */
+.data-form {
+    width: fit-content;
+}
+.data-form div {
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: space-between;
+}
+.data-form div label {
+    font-weight: bold;
+    margin-right: 1em;
+}

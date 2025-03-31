@@ -160,3 +160,5 @@ echo <<<HTML
     <button type="submit">Delete</button>
 </form>
 HTML;
+include_once ROOT_PATH . '/public/footer.php';
+?>

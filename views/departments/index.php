@@ -33,3 +33,5 @@ echo <<<HTML
     </tbody>
 </table>
 HTML;
+include_once ROOT_PATH . '/public/footer.php';
+?>
