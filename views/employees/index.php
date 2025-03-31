@@ -44,6 +44,7 @@ foreach ($employees as $employee) {
 echo <<<HTML
     </tbody>
 </table>
+<button class="add-button" onclick="window.location.href='add.php'">Add Employee</button>
 HTML;
 
 include_once ROOT_PATH . '/public/footer.php';

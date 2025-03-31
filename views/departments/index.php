@@ -32,6 +32,7 @@ foreach ($departments as $department) {
 echo <<<HTML
     </tbody>
 </table>
+<button class="add-button" onclick="window.location.href='add.php'">Add Department</button>
 HTML;
 include_once ROOT_PATH . '/public/footer.php';
 ?>

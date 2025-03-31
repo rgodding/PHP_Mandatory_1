@@ -32,5 +32,9 @@ foreach ($projects as $project) {
 echo <<<HTML
     </tbody>
 </table>
+<button class="add-button" onclick="window.location.href='add.php'">
+    <span class="add-icon">+</span>
+    <span class="add-text">Add Project</span>
+</button>
 HTML;
 include_once ROOT_PATH . '/public/footer.php';
