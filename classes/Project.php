@@ -30,7 +30,7 @@ class Project extends Database
         SQL;
         try {
             $stmt = $this->pdo->prepare($sql);
-            $stmt->bindValue(':id', $projectId, PDO::PARAM_INT);
+            $stmt->bindValue(':projectId', $projectId, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch();
         } catch (PDOException $e) {

@@ -45,7 +45,8 @@ class Employee extends Database
         }
     }
 
-    function add(string $firstName, string $lastName, string $email, string $birth, string $departmentId): bool {
+    function add(string $firstName, string $lastName, string $email, string $birth, string $departmentId): bool
+    {
         $sql = <<<SQL
         INSERT INTO employee (firstName, lastName, email, birth, departmentId)
         VALUES (:firstName, :lastName, :email, :birth, :departmentId)
@@ -64,7 +65,7 @@ class Employee extends Database
         }
     }
 
-    function update(int $employeeId, string $firstName, string $lastName, string $email, string $birth, int $departmentId): bool 
+    function update(int $employeeId, string $firstName, string $lastName, string $email, string $birth, int $departmentId): bool
     {
         $sql = <<<SQL
         UPDATE employee
@@ -102,6 +103,7 @@ class Employee extends Database
         }
     }
 
+    // Department related methods
     function getByDepartmentId(int $departmentId): array|false
     {
         $sql = <<<SQL
@@ -171,5 +173,74 @@ class Employee extends Database
             return false;
         }
     }
+
+    // Project related methods
+    function getByProjectId(int $projectId): array|false
+    {
+        $sql = <<<SQL
+        SELECT e.employeeId, e.firstName, e.lastName
+        FROM employee e
+        INNER JOIN employee_project ep ON e.employeeId = ep.employeeId
+        WHERE ep.projectId = :projectId
+        SQL;
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':projectId', $projectId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+    function getProjectlessEmployees(int $projectId): array|false
+    {
+        $sql = <<<SQL
+        SELECT e.employeeId, e.firstName, e.lastName
+        FROM employee e
+        LEFT JOIN employee_project ep ON e.employeeId = ep.employeeId AND ep.projectId = :projectId
+        WHERE ep.projectId IS NULL
+        SQL;
+
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute(['projectId' => $projectId]);
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+    function addEmployeeToProject(int $employeeId, int $projectId): bool
+    {
+        $sql = <<<SQL
+        INSERT INTO employee_project (employeeId, projectId)
+        VALUES (:employeeId, :projectId)
+        SQL;
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':employeeId', $employeeId, PDO::PARAM_INT);
+            $stmt->bindValue(':projectId', $projectId, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+    function removeFromProject(int $employeeId, int $projectId): bool
+    {
+        $sql = <<<SQL
+        DELETE FROM employee_project
+        WHERE employeeId = :employeeId AND projectId = :projectId
+        SQL;
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':employeeId', $employeeId, PDO::PARAM_INT);
+            $stmt->bindValue(':projectId', $projectId, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 }
-?>

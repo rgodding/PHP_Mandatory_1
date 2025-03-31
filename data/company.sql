@@ -61,3 +61,11 @@ INSERT INTO employee (firstName, lastName, email, birth, departmentId) VALUES
 ('Sophia', 'Harris', 'sophia.harris@example.com', '1991-02-14', NULL),
 ('Liam', 'Clark', 'liam.clark@example.com', '1989-10-05', NULL),
 ('Isabella', 'Lewis', 'isabella.lewis@example.com', '1994-12-22', NULL);
+
+INSERT INTO employee_project (employeeId, projectId) VALUES
+-- Project 1
+(1, 1), (4, 1), (7, 1),
+-- Project 2
+(2, 2), (5, 2), (8, 2),
+-- Project 3
+(3, 3), (6, 3), (9, 3)
