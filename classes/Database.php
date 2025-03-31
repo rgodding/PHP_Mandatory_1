@@ -1,7 +1,6 @@
 <?php
 require_once 'DBCredentials.php';
 $step1 = 'mysql:host=';
-
 Class Database extends DBCredentials {
     protected ?PDO $pdo;
 

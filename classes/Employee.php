@@ -101,5 +101,75 @@ class Employee extends Database
             return false;
         }
     }
+
+    function getByDepartmentId(int $departmentId): array|false
+    {
+        $sql = <<<SQL
+        SELECT employeeId, firstName, lastName, email, birth, departmentId
+        FROM employee
+        WHERE departmentId = :departmentId
+        SQL;
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':departmentId', $departmentId, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            // echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    function getUnassignedEmployees(): array|false
+    {
+        $sql = <<<SQL
+        SELECT employeeId, firstName, lastName, email, birth, departmentId
+        FROM employee
+        WHERE departmentId IS NULL
+        SQL;
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            // echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    function addEmployeeToDepartment(int $employeeId, int $departmentId): bool
+    {
+        $sql = <<<SQL
+        UPDATE employee
+        SET departmentId = :departmentId
+        WHERE employeeId = :employeeId
+        SQL;
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':employeeId', $employeeId, PDO::PARAM_INT);
+            $stmt->bindValue(':departmentId', $departmentId, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+
+    function removeFromDepartment(int $employeeId): bool
+    {
+        $sql = <<<SQL
+        UPDATE employee
+        SET departmentId = NULL
+        WHERE employeeId = :employeeId
+        SQL;
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindValue(':employeeId', $employeeId, PDO::PARAM_INT);
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
 }
 ?>

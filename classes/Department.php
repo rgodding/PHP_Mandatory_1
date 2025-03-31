@@ -30,7 +30,7 @@ class Department extends Database
         SQL;
         try {
             $stmt = $this->pdo->prepare($sql);
-            $stmt->bindValue(':id', $departmentId, PDO::PARAM_INT);
+            $stmt->bindValue(':departmentId', $departmentId);
             $stmt->execute();
             return $stmt->fetch();
         } catch (PDOException $e) {

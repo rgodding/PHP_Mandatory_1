@@ -1,3 +1,11 @@
+/* Text Styles */
+.success-message {
+    color: #28a745;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 1em;
+}
+
 /* Navbar Styles */
 .navbar {
     background-color: #f0f0f0;
@@ -18,3 +26,38 @@
         text-decoration: underline;
     }
 }
+
+/* Table Styles */
+.data-table {
+    width: 30vw;
+    border: solid 1px #000;
+    border-collapse: collapse;
+}
+.data-table thead {
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    border-bottom: solid 1px #000;
+}
+.data-table tbody {
+    text-align: center;
+}
+.data-row {
+    height: 35px;
+    &:nth-child(odd) {
+        background-color: #dfdfdf;
+    }
+    &:hover {
+        background-color: #f0f0f0;
+        transition: background-color 0.3s ease-in;
+        cursor: pointer;
+    }
+}
+.data-menu-row {
+    height: 35px;
+}
+
+.data-table tbody tr td {
+    border-bottom: solid 1px #000;
+}
+
