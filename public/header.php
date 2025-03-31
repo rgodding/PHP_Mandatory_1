@@ -13,3 +13,4 @@
     <header>
         <h1><?=$pageTitle ?></h1>
     </header>
+    <div class="container">

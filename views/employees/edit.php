@@ -91,6 +91,9 @@ echo <<<HTML
             </select>
         </div>
         <div>
+            <input type="hidden" name="action" value="update">
+        </div>
+        <div>
             <button type="submit">Update</button>
         </div>
     </div>

@@ -11,7 +11,10 @@ include_once ROOT_PATH . '/public/nav.php';
     
 ?>
 <main>
-    <p>EEE Some long ... text here or something like that or u know lorem whatever</p>
+    <h1>Company Project</h1>
+    <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias vel odio deleniti, qui cum, veritatis corrupti sequi ea optio necessitatibus quam debitis explicabo, est sit quod accusamus officiis? Dolor, animi?
+    </p>
 </main>
 
 <?php include_once ROOT_PATH . '/public/footer.php'; ?>
