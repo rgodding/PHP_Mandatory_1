@@ -31,7 +31,7 @@ CREATE TABLE project (
 CREATE TABLE employee_project (
     employeeId INT NOT NULL,
     projectId INT NOT NULL,
-    FOREIGN KEY (employeeId) REFERENCES employee(employeeId),
+    FOREIGN KEY (employeeId) REFERENCES employee(employeeId) ON DELETE CASCADE,
     FOREIGN KEY (projectId) REFERENCES project(projectId)
 );
 
